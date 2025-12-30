@@ -1,6 +1,7 @@
 # Fast cpp logger
 
 A minimal, header only low-latency C++ logger using `mmap` and a background worker thread to avoid blocking the main execution.
+C++17 and later
 
 ### Features
 * **Non-blocking:** The main thread pushes tasks to a queue. and a worker thread handles disk I/O. Also no mutexes.
