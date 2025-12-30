@@ -15,7 +15,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-// logger class
 class Clogger {
 public:
   Clogger(const char *fp); // file path
