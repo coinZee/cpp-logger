@@ -2,6 +2,6 @@
 
 int main () {
   Clogger log{"log.txt"};
-  log.log("Shits happened");
+  log.log("some logs");
   return 0;
 }
