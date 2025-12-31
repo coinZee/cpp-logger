@@ -1,21 +1,23 @@
-# Fast cpp logger
+# Fast c++ logger v2
 
-A minimal, header only low-latency C++ logger using `mmap` and a background worker thread to avoid blocking the main execution.
-C++17 and later
+A simple, fast C++ logger for Linux/macOS. It uses a **Ring Buffer** and **mmap** to write logs without blocking your main thread.
 
-### Features
-* **Non-blocking:** The main thread pushes tasks to a queue. and a worker thread handles disk I/O. Also no mutexes.
-* **Zero-Copy I/O:** Uses linux `mmap` for direct memory access instead of slow file streams.
-* **Thread Safe:** Thread safe.
+**Requires:** C++17 (for `string_view`).
+
+### How it works
+* **No blocking:** The main thread just copies bytes into a buffer and keeps moving. No `malloc`, no `new`, no waiting for the disk.
+* **No locks:** Uses atomic indices (Head/Tail) to manage the buffer.
+* **mmap:** Writes directly to memory instead of using slow file streams (`fstream`).
+* **Cache friendly:** Variables are aligned to 64-byte cache lines so the CPU cores don't fight over them <3
 
 ### Compatibility
-* **Linux / macOS** (Native support via POSIX)
-* **Windows** (Requires WSL or code changes)
+* **Linux / macOS:** Works natively.
+* **Windows:** No (probably wsl).
 
 ### Build & Run
 ```bash
-# Compile (requires pthread)
-g++ example.cpp -o logger -pthread
+# Compile
+g++ main.cpp -std=c++17 -pthread -o logger # dont need -O2 or -O3 they failed miserably
 
 # Run
 ./logger
