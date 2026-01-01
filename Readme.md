@@ -5,10 +5,10 @@ A simple, fast C++ logger for Linux/macOS. It uses a **Ring Buffer** and **mmap*
 **Requires:** C++17 (for `string_view`).
 
 ### How it works
-* **No blocking:** The main thread just copies bytes into a buffer and keeps moving. No `malloc`, no `new`, no waiting for the disk.
+* **No blocking:** The main thread just copies bytes into a buffer and keeps moving. No `malloc`, no `new` or waiting for the disk.
 * **No locks:** Uses atomic indices (Head/Tail) to manage the buffer.
 * **mmap:** Writes directly to memory instead of using slow file streams (`fstream`).
-* **Cache friendly:** Variables are aligned to 64-byte cache lines so the CPU cores don't fight over them <3
+* **Cache friendly:** Variables are aligned to 64-byte cache lines <3
 
 ### Compatibility
 * **Linux / macOS:** Works natively.
